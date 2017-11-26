@@ -29,6 +29,7 @@ RDEPEND="
 	app-admin/logrotate
 	net-dns/bind
 	dev-db/mariadb
+	dev-lang/php
 "
 DEPEND="
 ${RDEPEND}
