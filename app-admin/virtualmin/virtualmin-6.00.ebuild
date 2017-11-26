@@ -56,8 +56,6 @@ EOF
 
 src_install() {
 	dodir "${S}" "${D}/usr/libexec/webmin/"
-	mv "${WORKDIR}/usr" "${D}"
-	mv "${WORKDIR}/etc" "${D}"
 }
 
 pkg_postinst() {
