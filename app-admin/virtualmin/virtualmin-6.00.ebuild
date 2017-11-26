@@ -57,7 +57,7 @@ EOF
 
 src_install() {
 	cp -a "${S}" "${D}/usr/libexec/webmin/"
-	cp -a "${D}/usr/libexec/webmin/virtual-server/config" ${D}/etc/webmin/virtual-server/config"
+	cp -a "${D}/usr/libexec/webmin/virtual-server/config" "${D}/etc/webmin/virtual-server/config"
 }
 
 pkg_postinst() {
