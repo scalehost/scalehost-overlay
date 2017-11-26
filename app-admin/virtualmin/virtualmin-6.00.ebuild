@@ -35,7 +35,6 @@ ${RDEPEND}
 "
 
 src_compile() {
-	mkdir -p "${D}/usr/bin"
 	$(tc-getCC) ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} \
 		-o "${D}/usr/bin/procmail-wrapper" \
 		"${S}/procmail-wrapper.c" \
@@ -45,9 +44,11 @@ src_compile() {
 }
 
 src_prepare() {
+	mkdir -p "${D}/usr/bin"
+	mkdir -p "${D}/etc/webmin/virtual-server"
+	mkdir -p "${D}/usr/libexec/webmin"
 	find "${S}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
 	find "${S}" -type f -iname '*.cgi' -print0 | xargs -0 chmod 0744
-	mkdir -p "${D}/etc"
 	cat <<EOF >"${D}/etc/virtualmin-license"
 SerialNumber=GPL
 LicenseKey=GPL
@@ -56,9 +57,12 @@ EOF
 
 src_install() {
 	cp -a "${S}" "${D}/usr/libexec/webmin/"
+	cp -a "${D}/usr/libexec/webmin/virtual-server/config" ${D}/etc/webmin/virtual-server/config"
 }
 
 pkg_postinst() {
+	rm -f -- "${ROOT}etc/webmin/module.infos.cache"
+	grep -E '^(root: .* virtual-server)' ${ROOT}etc/webmin/webmin.acl >/dev/null || sed -E -i 's|^(root: .*)$|\1 virtual-server|g' ${ROOT}etc/webmin/webmin.acl
 	ewarn "If you have already purchased a license from virtualmin.com,"
 	ewarn "please modify the /etc/virtualmin-license file accordingly."
 }
