@@ -55,7 +55,7 @@ EOF
 }
 
 src_install() {
-	dodir "${S}" "${D}/usr/libexec/webmin/"
+	cp -a "${S}" "${D}/usr/libexec/webmin/"
 }
 
 pkg_postinst() {
