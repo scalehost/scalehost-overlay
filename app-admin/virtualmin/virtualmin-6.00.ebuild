@@ -17,7 +17,7 @@ RDEPEND="
 	app-admin/webmin
 	dev-perl/SMTP-Server
 	dev-perl/Net-Whois-Raw
-	www-servers/apache[suexec]
+	www-servers/apache[suexec,apache2_modules_access_compat]
 	mail-mta/postfix
 	net-mail/dovecot
 	mail-filter/spamassassin
