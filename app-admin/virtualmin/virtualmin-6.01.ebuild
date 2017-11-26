@@ -4,7 +4,9 @@ inherit eutils rpm
 
 DESCRIPTION="A Webmin module for managing multiple virtual hosts"
 HOMEPAGE="https://www.virtualmin.com/"
-SRC_URI="http://download.webmin.com/download/virtualmin/wbm-virtual-server-${PV}.gpl-1.noarch.rpm"
+SRC_URI="http://download.webmin.com/download/virtualmin/virtual-server-${PV}.gpl.wbm.gz -> ${P}.tar.gz"
+S="${WORKDIR}/virtual-server"
+
 
 LICENSE="BSD GPL-2"
 SLOT="0"
@@ -32,32 +34,28 @@ DEPEND="
 ${RDEPEND}
 "
 
-src_unpack(){
-	mkdir -p "${S}"
-	rpm_src_unpack "${A}"
-}
-
 src_compile() {
-	mkdir -p "${WORKDIR}/usr/bin"
+	mkdir -p "${D}/usr/bin"
 	$(tc-getCC) ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} \
-		-o "${WORKDIR}/usr/bin/procmail-wrapper" \
-		"${WORKDIR}/usr/libexec/webmin/virtual-server/procmail-wrapper.c" \
+		-o "${D}/usr/bin/procmail-wrapper" \
+		"${S}/procmail-wrapper.c" \
 		|| die
+	chmod u+sx "${D}/usr/bin/procmail-wrapper"
+	chmod g+sx "${D}/usr/bin/procmail-wrapper"
 }
 
 src_prepare() {
-	find "${WORKDIR}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
-	find "${WORKDIR}" -type f -iname '*.cgi' -print0 | xargs -0 chmod 0744
-	mkdir -p "${WORKDIR}/etc"
-	cat <<EOF >"${WORKDIR}/etc/virtualmin-license"
+	find "${S}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
+	find "${S}" -type f -iname '*.cgi' -print0 | xargs -0 chmod 0744
+	mkdir -p "${D}/etc"
+	cat <<EOF >"${D}/etc/virtualmin-license"
 SerialNumber=GPL
 LicenseKey=GPL
 EOF
-	chmod u+s "${WORKDIR}/usr/bin/procmail-wrapper"
-	chmod g+s "${WORKDIR}/usr/bin/procmail-wrapper"
 }
 
 src_install() {
+	dodir "${S}" "${D}/usr/libexec/webmin/"
 	mv "${WORKDIR}/usr" "${D}"
 	mv "${WORKDIR}/etc" "${D}"
 }
