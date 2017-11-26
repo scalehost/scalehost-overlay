@@ -27,9 +27,11 @@ RDEPEND="
 	www-misc/awstats
 	app-antivirus/clamav
 	app-admin/logrotate
-	net-dns/bind
+	net-dns/bind[idn]
+	net-dns/bind-tools[ind]
 	dev-db/mariadb
 	dev-lang/php[cgi]
+	
 "
 DEPEND="
 ${RDEPEND}
