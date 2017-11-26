@@ -28,7 +28,7 @@ RDEPEND="
 	app-antivirus/clamav
 	app-admin/logrotate
 	net-dns/bind[idn]
-	net-dns/bind-tools[ind]
+	net-dns/bind-tools[idn]
 	dev-db/mariadb
 	dev-lang/php[cgi]
 	
