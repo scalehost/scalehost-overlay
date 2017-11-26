@@ -49,15 +49,18 @@ src_prepare() {
 	mkdir -p "${D}/usr/libexec/webmin"
 	find "${S}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
 	find "${S}" -type f -iname '*.cgi' -print0 | xargs -0 chmod 0744
+}
+
+src_install() {
+	mkdir -p "${D}/usr/bin"
+	mkdir -p "${D}/etc/webmin/virtual-server"
+	mkdir -p "${D}/usr/libexec/webmin"
 	cat <<EOF >"${D}/etc/virtualmin-license"
 SerialNumber=GPL
 LicenseKey=GPL
 EOF
-}
-
-src_install() {
 	cp -a "${S}" "${D}/usr/libexec/webmin/"
-	cp -a "${D}/usr/libexec/webmin/virtual-server/config" "${D}/etc/webmin/virtual-server/config"
+	cp -a "${S}/config" "${D}/etc/webmin/virtual-server/config"
 }
 
 pkg_postinst() {
