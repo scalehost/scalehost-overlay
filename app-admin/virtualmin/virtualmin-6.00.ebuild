@@ -49,7 +49,7 @@ src_prepare() {
 	find "${WORKDIR}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
 	find "${WORKDIR}" -type f -iname '*.cgi' -print0 | xargs -0 chmod 0744
 	mkdir -p "${WORKDIR}/etc"
-	cat <<EOF>"${WORKDIR}/etc/virtualmin-license"
+	cat <<EOF >"${WORKDIR}/etc/virtualmin-license"
 SerialNumber=GPL
 LicenseKey=GPL
 EOF
