@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>scalehost</name>
+		<description>Custom overlay for scalehost.eu</description>
+		<owner>
+			<name>Steffen Rytter Postas</name>
+			<email>nc@scalehost.eu</email>
+		</owner>
+		<source type="git">https://github.com/scalehost/scalehost-overlay.git</source>
+	</repo>
+</repositories>
