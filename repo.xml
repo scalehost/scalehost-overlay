@@ -4,6 +4,7 @@
 	<repo priority="50" quality="experimental" status="unofficial">
 		<name>scalehost</name>
 		<description>Custom overlay for scalehost.eu</description>
+		<homepage>https://scalehost.eu</homepage>
 		<owner>
 			<name>Steffen Rytter Postas</name>
 			<email>nc@scalehost.eu</email>
