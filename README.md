@@ -15,4 +15,4 @@ sync-uri = https://github.com/scalehost/scalehost-overlay
 
 Or you can add it using layman:  
 
-`layman -o https://github.com/scalehost/scalehost-overlay/blob/master/repo.xml -a scalehost`
+`layman -o https://github.com/scalehost/scalehost-overlay/blob/master/repo.xml -f -a scalehost`
