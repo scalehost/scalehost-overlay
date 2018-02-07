@@ -30,7 +30,7 @@ RDEPEND="
 	net-dns/bind[idn]
 	net-dns/bind-tools[idn]
 	dev-db/mariadb
-	dev-lang/php[cgi]
+	dev-lang/php:*[cgi]
 	
 "
 DEPEND="
