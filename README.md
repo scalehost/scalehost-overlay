@@ -1,6 +1,6 @@
-# Scalehost Gentoo Overlay
+# ScaleHost Gentoo Overlay
 
-This is a simple overlay for Gentoo with various packages used and/or created by scalehost and/or third parties relating to scalehost.
+This is a simple overlay for Gentoo with various packages used and/or created by ScaleHost and/or third parties relating to ScaleHost.
 
 ## Install
 
