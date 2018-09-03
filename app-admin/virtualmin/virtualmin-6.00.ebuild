@@ -1,4 +1,7 @@
-EAPI="5"
+# Copyright 2018 Steffen Rytter Postas <nc@scalehost.eu>
+# Distributed under the terms of the GNU General Public License v3
+
+EAPI="6"
 
 inherit eutils rpm
 
@@ -7,14 +10,12 @@ HOMEPAGE="https://www.virtualmin.com/"
 SRC_URI="http://download.webmin.com/download/virtualmin/virtual-server-${PV}.gpl.wbm.gz -> ${P}.tar.gz"
 S="${WORKDIR}/virtual-server"
 
-
 LICENSE="BSD GPL-2"
 SLOT="0"
 
-KEYWORDS="amd64 x86 arm arm64"
+KEYWORDS="amd64 x86 ~arm ~arm64"
 
-RDEPEND="
-	app-admin/webmin
+RDEPEND="app-admin/webmin
 	dev-perl/SMTP-Server
 	dev-perl/Net-Whois-Raw
 	www-servers/apache[suexec,apache2_modules_access_compat]
@@ -30,12 +31,8 @@ RDEPEND="
 	net-dns/bind[idn]
 	net-dns/bind-tools[idn]
 	dev-db/mariadb
-	dev-lang/php:*[cgi]
-	
-"
-DEPEND="
-${RDEPEND}
-"
+	dev-lang/php:*[cgi]"
+DEPEND="${RDEPEND}"
 
 src_prepare() {
 	find "${S}" -type f -iname '*.pl' -print0 | xargs -0 chmod 0744
@@ -63,12 +60,11 @@ EOF
 pkg_postinst() {
 	os_type=`grep "^os_type=" /etc/webmin/config | sed -e 's/os_type=//g'`
 	os_version=`grep "^os_version=" /etc/webmin/config | sed -e 's/os_version=//g'`
-	perl ${ROOT}usr/libexec/webmin/copyconfig.pl $os_type $os_version ${ROOT}usr/share/webmin ${ROOT}etc/webmin virtual-server
+	perl "${ROOT}usr/libexec/webmin/copyconfig.pl" "$os_type" "$os_version" "${ROOT}usr/share/webmin" "${ROOT}etc/webmin" "virtual-server"
 	rm -f -- "${ROOT}etc/webmin/module.infos.cache"
-	grep -E '^(root: .* virtual-server)' ${ROOT}etc/webmin/webmin.acl >/dev/null || sed -E -i 's|^(root: .*)$|\1 virtual-server|g' ${ROOT}etc/webmin/webmin.acl
-	cd ${ROOT}usr/libexec/webmin
-	WEBMIN_CONFIG=${ROOT}etc/webmin WEBMIN_VAR=${ROOT}var/webmin ${ROOT}usr/libexec/webmin/run-postinstalls.pl virtual-server
+	grep -E '^(root: .* virtual-server)' "${ROOT}etc/webmin/webmin.acl" >/dev/null || sed -E -i 's|^(root: .*)$|\1 virtual-server|g' "${ROOT}etc/webmin/webmin.acl"
+	cd "${ROOT}usr/libexec/webmin"
+	WEBMIN_CONFIG="${ROOT}etc/webmin" WEBMIN_VAR="${ROOT}var/webmin" "${ROOT}usr/libexec/webmin/run-postinstalls.pl" virtual-server
 	ewarn "If you have already purchased a license from virtualmin.com,"
 	ewarn "please modify the /etc/virtualmin-license file accordingly."
 }
-
