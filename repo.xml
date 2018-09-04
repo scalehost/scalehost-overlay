@@ -9,6 +9,6 @@
 			<name>Steffen Rytter Postas</name>
 			<email>nc@scalehost.eu</email>
 		</owner>
-		<source type="git">https://github.com/scalehost/scalehost-overlay.git</source>
+		<source type="git">https://gitea.scalehost.eu/ScaleHost/scalehost-overlay.git</source>
 	</repo>
 </repositories>
